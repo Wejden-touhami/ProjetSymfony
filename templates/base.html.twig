@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    {% block title %}
+        <title> Recrute </title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free Website Template" name="keywords">
+        <meta content="Free Website Template" name="description">
+    {% endblock %}
+    <!-- Favicon -->
+    <link href="{{ asset("img/img-2.ico") }}" >
+
+    <!-- Google Font-->
+    <link href="{{ asset("https://fonts.googleapis.com/css?family=Open+Sans:300,400|Nunito:600,700")}}" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    {% block css %}
+        <link href="{{ asset("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")}}" rel="stylesheet">
+        <link href="{{ asset("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css")}}" rel="stylesheet">
+        <link href="{{ asset("lib/animate/animate.min.css")}}" rel="stylesheet">
+        <link href="{{ asset("lib/owlcarousel/assets/owl.carousel.min.css")}}" rel="stylesheet">
+        <link href="{{ asset("lib/flaticon/font/flaticon.css")}}" rel="stylesheet">
+        <link href="{{ asset("lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css")}}" rel="stylesheet" />
+
+        <!-- Template Stylesheet -->
+        <link href="{{ asset("css/style.css")}}" rel="stylesheet">
+    {% endblock %}
+</head>
+
+           <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-light navbar-light">
+          {% if app.user %}
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand"> Recrute <span> Site</span></a>
+                
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+      <a class="nav-link" href="/user"> {{app.user.email}} <span class="sr-only"></span></a>
+                              {# Les boutons pour le condidats #}
+      {% if is_granted('ROLE_CONDIDAT') == true  %}
+        <a class="nav-link" href="/condidature"> Mes condidatures <span class="sr-only"></span></a>
+        {% endif %}
+        {% if is_granted('ROLE_CONDIDAT') == true  %}
+        <a class="nav-link" href="/entretien"> Mes entretiens <span class="sr-only"></span></a>
+        {% endif %}
+        {% if is_granted('ROLE_CONDIDAT') == true  %}
+        <a class="nav-link" href="/confirmation"> Mes confirmations <span class="sr-only"></span></a>
+        {% endif %}
+      {# Les boutons pour le recruteur #}
+         {% if is_granted('ROLE_RECRUTEUR') == true  %}
+        <a class="nav-link" href="/condidature"> Les condidatures <span class="sr-only"></span></a>
+        {% endif %}
+         {% if is_granted('ROLE_RECRUTEUR') == true  %}
+        <a class="nav-link" href="/annonce"> Mes annonces <span class="sr-only"></span></a>
+        {% endif %}
+        {% if is_granted('ROLE_RECRUTEUR') == true  %}
+        <a class="nav-link" href="/entretien"> Entretiens <span class="sr-only"></span></a>
+        {% endif %}
+        {% if is_granted('ROLE_RECRUTEUR') == true  %}
+        <a class="nav-link" href="/confirmation"> Confirmations <span class="sr-only"></span></a>
+        {% endif %}
+        {% if is_granted('ROLE_RECRUTEUR') == true  %}
+        <a class="nav-link" href="/categorie"> Catégories<span class="sr-only"></span></a>
+        {% endif %}
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a class="nav-link" href="/logout"> Logout <span class="sr-only"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </li>
+      </ul>
+    </div>
+  {% else %}
+  <div class="collapse navbar-collapse" id="mobile-nav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/login">Login <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/register">Register <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+
+  {% endif %}
+                                      
+        <!-- Nav Bar End -->
+</nav>
+
+        <!-- Page Header Start HOUNI TASWIIIIIIIRA -->
+        <div class=" mb-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        {% if is_granted('ROLE_CONDIDAT') == true  %}
+                        <a class="navbar-brand" href="/home/page">Home</a>
+                        {% endif %}
+                        {% if is_granted('ROLE_RECRUTEUR') == true  %}
+                        <a class="navbar-brand" href="/annonce"> Home </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page Header End -->
+
+        <!-- Food Start -->
+        <div class="food mt-0">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                        <div class="food-item">
+                            <i class="fas fa-brain"></i>
+                            <p>
+                            </p>
+                            <a href=""></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="food-item">
+                            <i class="fas fa-chess"></i>
+                            <h2></h2>
+                            <p>
+                            </p>
+                            <a href=""></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="food-item">
+                            <i class="fas fa-chart-line"></i>
+                            <h6> Celui qui ne progresse pas chaque jour, recule toujours.</h6>
+                            <p>
+                            </p>
+                            <a href=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Food End -->
+
+
+
+
+
+        {# Run composer require symfony/webpack-encore-bundle
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+        {% block javascripts %}
+    <script src="{{ asset("https://code.jquery.com/jquery-3.4.1.min.js")}}"></script>
+    <script src="{{ asset("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js")}}"></script>
+    <script src="{{ asset("lib/easing/easing.min.js")}}"></script>
+    <script src="{{ asset("lib/owlcarousel/owl.carousel.min.js")}}"></script>
+    <script src="{{ asset("lib/tempusdominus/js/moment.min.js")}}"></script>
+    <script src="{{ asset("lib/tempusdominus/js/moment-timezone.min.js")}}"></script>
+    <script src="{{ asset("lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js")}}"></script>
+        {% endblock %}
+    <body>
+        {% block body %}
+        <!-- Contact Javascript File -->
+    <script src="{{ asset("mail/jqBootstrapValidation.min.js")}}"></script>
+    <script src="{{ asset("mail/contact.js")}}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{{ asset("js/main.js")}}"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        {% endblock %}
+
+
+<!-- JavaScript Libraries -->
+        <script src="{{ asset("https://code.jquery.com/jquery-3.4.1.min.js")}}"></script>
+        <script src="{{ asset("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js")}}"></script>
+        <script src="{{ asset("lib/easing/easing.min.js")}}"></script>
+        <script src="{{ asset("lib/owlcarousel/owl.carousel.min.js")}}"></script>
+        <script src="{{ asset("lib/tempusdominus/js/moment.min.js")}}"></script>
+        <script src="{{ asset("lib/tempusdominus/js/moment-timezone.min.js")}}"></script>
+        <script src="{{ asset("lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js")}}"></script>
+        
+        <!-- Contact Javascript File -->
+        <script src="{{ asset("mail/jqBootstrapValidation.min.js")}}"></script>
+        <script src="{{ asset("mail/contact.js")}}"></script>
+
+        <!-- Template Javascript -->
+        <script src="{{ asset("js/main.js")}}"></script>
+
+
+
+    
+
+
+
+
+    </body>
+</html>

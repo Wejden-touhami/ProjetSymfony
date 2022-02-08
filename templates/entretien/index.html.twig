@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entretien index{% endblock %}
+
+{% block body %}
+    <h1>Entretien index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Emplacement</th>
+                <th>Message</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entretien in entretiens %}
+            <tr>
+                {% if entretien.IdCondidature == app.user.getIdCondidature()  %}
+                <td>{{ entretien.id }}</td>
+                <td>{{ entretien.Date ? entretien.Date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ entretien.Emplacement }}</td>
+                <td>{{ entretien.Message }}</td>
+                <td> 
+                    <a href="{{ path('entretien_show', {'id': entretien.id}) }}">show</a>
+                    {% if is_granted('ROLE_RECRUTEUR') == true  %}
+                    <p> Helloooo</p>
+                    <a href="{{ path('entretien_edit', {'id': entretien.id}) }}">edit</a>
+                    {% endif %}
+                    <a href="{{ path('confirmation_new') }}"> Confirmer</a>
+
+                </td>
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_RECRUTEUR') == true  %}
+    <a href="{{ path('entretien_new') }}">Create new</a>
+    {% endif %}
+{% endblock %}

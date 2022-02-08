@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Condidature{% endblock %}
+
+{% block body %}
+    <h1>Condidature</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ condidature.id }}</td>
+            </tr>
+            <tr>
+                <th>NomCondidat</th>
+                <td>{{ condidature.NomCondidat }}</td>
+            </tr>
+            <tr>
+                <th>PrenomCondidat</th>
+                <td>{{ condidature.PrenomCondidat }}</td>
+            </tr>
+            <tr>
+                <th>AgeCondidat</th>
+                <td>{{ condidature.AgeCondidat }}</td>
+            </tr>
+            <tr>
+                <th>NumTelCondidat</th>
+                <td>{{ condidature.NumTelCondidat }}</td>
+            </tr>
+            <tr>
+                <th>MailCondidat</th>
+                <td>{{ condidature.MailCondidat }}</td>
+            </tr>
+            <tr>
+                <th>AdressVille</th>
+                <td>{{ condidature.AdressVille }}</td>
+            </tr>
+            <tr>
+                <th>LienLinkedin</th>
+                <td>{{ condidature.LienLinkedin }}</td>
+            </tr>
+            <tr>
+                <th>LienGithub</th>
+                <td>{{ condidature.LienGithub }}</td>
+            </tr>
+            <tr>
+                <th>Cv Condidat</th>
+                <td><a href="{{ asset('uploads/CV/' ~ condidature.CvCondidat) }}">{{ condidature.CvCondidat }}</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('condidature_index') }}">back to list</a>
+
+    <a href="{{ path('condidature_edit', {'id': condidature.id}) }}">edit</a>
+
+    {{ include('condidature/_delete_form.html.twig') }}
+{% endblock %}

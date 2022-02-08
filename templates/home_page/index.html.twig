@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonce index{% endblock %}
+
+{% block body %}
+    <h1>Annonce index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Date_annonce</th>
+                <th>Deadline</th>
+                <th>KeyWord</th>
+                <th>Societe</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonce in annonces %}
+            <tr>
+                <td>{{ annonce.id }}</td>
+                <td>{{ annonce.Titre }}</td>
+                <td>{{ annonce.Description }}</td>
+                <td>{{ annonce.DateAnnonce ? annonce.DateAnnonce|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ annonce.Deadline ? annonce.Deadline|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ annonce.KeyWord }}</td>
+                <td>{{ annonce.Societe }}</td>
+                <td>
+                    <a href="{{ path('annonce_show', {'id': annonce.id}) }}">show</a>
+                    <a href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
+                    <a href="{{ path('condidature_new', {'id': annonce.id}) }}">Create Condidature</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_RECRUTEUR') == true  %}
+        <a href="{{ path('annonce_new') }}">Create new</a>
+
+{% endif %}
+        
+
+{% endblock %}

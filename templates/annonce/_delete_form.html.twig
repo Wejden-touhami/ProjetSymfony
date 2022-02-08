@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('annonce_delete', {'id': annonce.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ annonce.id) }}">
+  {% if is_granted('ROLE_RECRUTEUR') == true  %}
+    <button class="btn">Delete</button>
+    {% endif %}
+</form>

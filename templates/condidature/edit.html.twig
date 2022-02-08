@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Condidature{% endblock %}
+
+{% block body %}
+    <h1>Edit Condidature</h1>
+
+    {{ include('condidature/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('condidature_index') }}">back to list</a>
+
+    {{ include('condidature/_delete_form.html.twig') }}
+{% endblock %}

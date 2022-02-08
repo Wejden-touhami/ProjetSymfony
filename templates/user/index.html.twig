@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <h1>User index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+               {#<th>Password</th> #} 
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>AdresseVille</th>
+                <th>NumTelephone</th>
+                <th>Age</th>
+                <th>Photo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ app.user.id }}</td>
+                <td>{{ app.user.email }}</td>
+               {#} <td>{{ app.user.password }}</td>#}
+                <td>{{ app.user.Nom }}</td>
+                <td>{{ app.user.Prenom }}</td>
+                <td>{{ app.user.AdresseVille }}</td>
+                <td>{{ app.user.NumTelephone }}</td>
+                <td>{{ app.user.Age }}</td>
+                <td><img src="{{ asset('/uploads/photo/' ~ app.user.Photo) }}" alt="" width="150"></td>
+
+                <td>
+                    <a href="{{ path('user_show', {'id': app.user.id}) }}">show</a>
+                    <a href="{{ path('user_edit', {'id': app.user.id}) }}">edit</a>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+{% endblock %}

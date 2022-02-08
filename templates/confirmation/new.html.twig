@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Confirmation{% endblock %}
+
+{% block body %}
+    <h1>Create new Confirmation</h1>
+
+    {{ include('confirmation/_form.html.twig') }}
+
+    <a href="{{ path('confirmation_index') }}">back to list</a>
+{% endblock %}

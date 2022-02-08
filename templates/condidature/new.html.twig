@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Condidature{% endblock %}
+
+{% block body %}
+    <h1>Créer Condidature</h1>
+
+    {{ include('condidature/_form.html.twig') }}
+
+    <a href="{{ path('condidature_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            {# ************ Ne Pas afficher le role ************* 
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            #}
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.Nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ user.Prenom }}</td>
+            </tr>
+            <tr>
+                <th>AdresseVille</th>
+                <td>{{ user.AdresseVille }}</td>
+            </tr>
+            <tr>
+                <th>NumTelephone</th>
+                <td>{{ user.NumTelephone }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ user.Age }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+               <td><img src="{{ asset('/uploads/photo/' ~ app.user.Photo) }}" alt="" width="150"></td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_index') }}">back to list</a>
+
+    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+
+{% endblock %}

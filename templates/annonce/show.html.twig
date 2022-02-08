@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonce{% endblock %}
+
+{% block body %}
+    <h1>Annonce</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ annonce.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ annonce.Titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ annonce.Description }}</td>
+            </tr>
+            <tr>
+                <th>Date_annonce</th>
+                <td>{{ annonce.DateAnnonce ? annonce.DateAnnonce|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Deadline</th>
+                <td>{{ annonce.Deadline ? annonce.Deadline|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>KeyWord</th>
+                <td>{{ annonce.KeyWord }}</td>
+            </tr>
+            <tr>
+                <th>Societe</th>
+                <td>{{ annonce.Societe }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('annonce_index') }}">back to list</a>
+    {% if is_granted('ROLE_RECRUTEUR') == true  %}
+    <a href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
+    {% endif %}
+    {{ include('annonce/_delete_form.html.twig') }}
+{% endblock %}

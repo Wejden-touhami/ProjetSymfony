@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonce{% endblock %}
+
+{% block body %}
+    <h1>Annonce </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Date_annonce</th>
+                <th>Deadline</th>
+                <th>KeyWord</th>
+                <th>Societe</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonce in annonces %}
+            <tr>
+                <td>{{ annonce.id }}</td>
+                <td>{{ annonce.Titre }}</td>
+                <td>{{ annonce.Description }}</td>
+                <td>{{ annonce.DateAnnonce ? annonce.DateAnnonce|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ annonce.Deadline ? annonce.Deadline|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ annonce.KeyWord }}</td>
+                <td>{{ annonce.Societe }}</td>
+                <td>
+                    <a href="{{ path('annonce_show', {'id': annonce.id}) }}">show</a>
+                    {% if is_granted('ROLE_RECRUTEUR') == true  %}
+                    <a href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
+                    {% endif %}
+                    
+                    {# PARTIE CONDIDAT #}
+
+                    {% if is_granted('ROLE_CONDIDAT') == true  %}
+                    {#Tester le nbr candidature#}
+                    {% if app.user.NbrCandidature > app.user.Regle %}
+                    <a href="{{ path('condidature_new', {'id': annonce.id}) }}">Create Condidature</a>
+                    {% endif %}
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+                   {#Afficher Alerte si NbCondidature > Regle #}
+                   {% if app.user.NbrCandidature < app.user.Regle %}
+                   
+                   <script type="text/javascript">
+		            var msg =" Nombre de condidature :/ , essayer de supprimer une condidature ! "
+		            alert (msg);
+                    
+                    
+	                </script>
+                    {% endif %}
+        </tbody>
+    </table>
+{% if is_granted('ROLE_RECRUTEUR') == true  %}
+<a href="{{ path('annonce_new') }}">Create new</a>
+
+{% endif %}
+        
+
+{% endblock %}

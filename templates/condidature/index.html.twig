@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Condidature {% endblock %}
+
+{% block body %}
+    <h1>Condidature </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>NomCondidat</th>
+                <th>PrenomCondidat</th>
+                <th>AgeCondidat</th>
+                <th>NumTelCondidat</th>
+                <th>MailCondidat</th>
+                <th>AdressVille</th>
+                <th>LienLinkedin</th>
+                <th>LienGithub</th>
+                <th>CvCondidat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for condidature in condidatures %}
+            <tr> 
+               {# Vue Recruteur #}
+               {% if is_granted('ROLE_RECRUTEUR') == true  %}
+                <td>{{ condidature.NomCondidat }}</td>
+                <td>{{ condidature.PrenomCondidat }}</td>
+                <td>{{ condidature.AgeCondidat }}</td>
+                <td>{{ condidature.NumTelCondidat }}</td>
+                <td>{{ condidature.MailCondidat }}</td>
+                <td>{{ condidature.AdressVille }}</td>
+                <td>{{ condidature.LienLinkedin }}</td>
+                <td>{{ condidature.LienGithub }}</td>
+                <tr>
+                <th>CV</th>
+                <td><a href="{{ asset('uploads/CV/' ~ condidature.CvCondidat) }}">Voir le CV</a></td>
+            </tr>
+                <td>
+                entretien_new
+                    <a href="{{ path('condidature_show', {'id': condidature.id}) }}">show</a>
+                    <a href="{{ path('condidature_edit', {'id': condidature.id}) }}">edit</a>
+                    {% if is_granted('ROLE_RECRUTEUR') == true  %}
+                     <a href="{{ path('entretien_new') }}"> Création Entretien</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endif %}
+            {# Vue Condidats #}
+               {% if is_granted('ROLE_CONDIDAT') == true  %}
+               {% if app.user.Prenom == condidature.PrenomCondidat   %}
+                <td>{{ condidature.id }}</td>
+                <td>{{ condidature.NomCondidat }}</td>
+                <td>{{ condidature.PrenomCondidat }}</td>
+                <td>{{ condidature.AgeCondidat }}</td>
+                <td>{{ condidature.NumTelCondidat }}</td>
+                <td>{{ condidature.MailCondidat }}</td>
+                <td>{{ condidature.AdressVille }}</td>
+                <td>{{ condidature.LienLinkedin }}</td>
+                <td>{{ condidature.LienGithub }}</td>
+                <td>{{ condidature.CvCondidat }}</td>
+                <td>
+                entretien_new
+                    <a href="{{ path('condidature_show', {'id': condidature.id}) }}">show</a>
+                    <a href="{{ path('condidature_edit', {'id': condidature.id}) }}">edit</a>
+
+                    
+                    {% if is_granted('ROLE_RECRUTEUR') == true  %}
+                     <a href="{{ path('entretien_new') }}"> Création Entretien</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endif %}
+            {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+     {% if is_granted('ROLE_CONDIDAT') == true  %}
+    <a href="{{ path('condidature_new') }}">Create new</a>
+    {% endif %}
+{% endblock %}
